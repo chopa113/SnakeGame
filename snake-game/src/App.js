@@ -17,7 +17,7 @@ function App() {
       game.checkIfAppleEaten();
       game.apple();
       setField([...game.getField()]);
-    }, 500);
+    }, 200);
 
     return () => clearInterval(interval);
   }, [direction, game]);
@@ -51,11 +51,11 @@ function App() {
           
         ))}
         <div className="controls">
-        <button onClick={() => handleMove('up')}>Up</button>
-        <button onClick={() => handleMove('down')}>Down</button>
-        <button onClick={() => handleMove('left')}>Left</button>
-        <button onClick={() => handleMove('right')}>Right</button>
-      </div>
+        <button className='button' onClick={() => handleMove('up')}>Up</button>
+        <button className='button' onClick={() => handleMove('down')}>Down</button>
+        <button className='button' onClick={() => handleMove('left')}>Left</button>
+        <button className='button' onClick={() => handleMove('right')}>Right</button>
+        </div>
       </div>
     </div>
   );

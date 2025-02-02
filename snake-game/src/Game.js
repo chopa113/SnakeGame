@@ -7,6 +7,8 @@ class Game {
         this.applePosition = { x: null, y: null };
         this.snake = [{ x: 0, y: 0 }];
         this.snakeDirection = 'right';
+        
+        document.addEventListener('keydown', this.handleKeyDown.bind(this));
     }
     
     createField() {
@@ -23,7 +25,7 @@ class Game {
     }
 
     apple() {
-        if (this.appleExists === false) {
+        if (!this.appleExists) {
             let x = Math.floor(Math.random() * this.fieldWidth);
             let y = Math.floor(Math.random() * this.fieldHeight);
 
@@ -45,7 +47,6 @@ class Game {
 
     checkIfAppleEaten() {
         const head = this.snake[0];
-
         if (head.x === this.applePosition.x && head.y === this.applePosition.y) {
             this.appleExists = false;
             this.handleAppleEaten();
@@ -59,20 +60,43 @@ class Game {
 
     checkSelfCollision() {
         const head = this.snake[0];
-
         for (let i = 1; i < this.snake.length; i++) {
             if (this.snake[i].x === head.x && this.snake[i].y === head.y) {
                 return true;
             }
         }
-
         return false;
     }
 
-    moveSnake(direction) {
+    handleKeyDown(event) {
+        switch (event.key) {
+            case 'ArrowUp':
+                if (this.snakeDirection !== 'down') {
+                    this.snakeDirection = 'up';
+                }
+                break;
+            case 'ArrowDown':
+                if (this.snakeDirection !== 'up') {
+                    this.snakeDirection = 'down';
+                }
+                break;
+            case 'ArrowLeft':
+                if (this.snakeDirection !== 'right') {
+                    this.snakeDirection = 'left';
+                }
+                break;
+            case 'ArrowRight':
+                if (this.snakeDirection !== 'left') {
+                    this.snakeDirection = 'right';
+                }
+                break;
+        }
+    }
+
+    moveSnake() {
         let newHead = { ...this.snake[0] };
 
-        switch (direction) {
+        switch (this.snakeDirection) {
             case 'up':
                 newHead.y = (newHead.y - 1 + this.fieldHeight) % this.fieldHeight;
                 break;

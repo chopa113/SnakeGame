@@ -15,7 +15,7 @@ body {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #EEEEEE;
 }
 
 .cell {
@@ -49,18 +49,18 @@ a {
   font-size: 32px;
   font-weight: bold;
   text-align: center;
-  background-color: #66fcf1;
+  background-color: #222831;
 }
 
 .button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #00AD85;
+  color: #EEEEEE;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.button:hover {
+/* .button:hover {
   background-color: #0056b3;
-}
+} */
