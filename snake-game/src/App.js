@@ -14,8 +14,10 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       game.moveSnake(direction);
+      game.checkIfAppleEaten();
+      game.apple();
       setField([...game.getField()]);
-    }, 1000);
+    }, 500);
 
     return () => clearInterval(interval);
   }, [direction, game]);
@@ -29,12 +31,6 @@ function App() {
       <div className="title">
         <a href="#" className="roboto-mono">SnakeGame</a>
       </div>
-      <div className="controls">
-        <button onClick={() => handleMove('up')}>Up</button>
-        <button onClick={() => handleMove('down')}>Down</button>
-        <button onClick={() => handleMove('left')}>Left</button>
-        <button onClick={() => handleMove('right')}>Right</button>
-      </div>
       <div className="game-board">
         {field.map((row, i) => (
           <div key={i} className="row">
@@ -43,6 +39,7 @@ function App() {
                 key={j}
                 className="cell"
                 style={{
+                  backgroundImage: cell.image,
                   backgroundColor: cell.color,
                   width: '20px',
                   height: '20px',
@@ -51,7 +48,14 @@ function App() {
               />
             ))}
           </div>
+          
         ))}
+        <div className="controls">
+        <button onClick={() => handleMove('up')}>Up</button>
+        <button onClick={() => handleMove('down')}>Down</button>
+        <button onClick={() => handleMove('left')}>Left</button>
+        <button onClick={() => handleMove('right')}>Right</button>
+      </div>
       </div>
     </div>
   );
