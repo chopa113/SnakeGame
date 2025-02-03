@@ -13,7 +13,8 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      game.moveSnake(direction);
+      game.snakeDirection = direction;
+      game.moveSnake();
       game.checkIfAppleEaten();
       game.apple();
       setField([...game.getField()]);
@@ -21,6 +22,41 @@ function App() {
 
     return () => clearInterval(interval);
   }, [direction, game]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      switch (event.key) {
+        case 'ArrowUp':
+          if (direction !== 'down') {
+            setDirection('up');
+          }
+          break;
+        case 'ArrowDown':
+          if (direction !== 'up') {
+            setDirection('down');
+          }
+          break;
+        case 'ArrowLeft':
+          if (direction !== 'right') {
+            setDirection('left');
+          }
+          break;
+        case 'ArrowRight':
+          if (direction !== 'left') {
+            setDirection('right');
+          }
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [direction]);
 
   const handleMove = (newDirection) => {
     setDirection(newDirection);
@@ -39,7 +75,6 @@ function App() {
                 key={j}
                 className="cell"
                 style={{
-                  backgroundImage: cell.image,
                   backgroundColor: cell.color,
                   width: '20px',
                   height: '20px',
@@ -48,14 +83,15 @@ function App() {
               />
             ))}
           </div>
-          
         ))}
         <div className="controls">
-        <button className='button' onClick={() => handleMove('up')}>Up</button>
-        <button className='button' onClick={() => handleMove('down')}>Down</button>
-        <button className='button' onClick={() => handleMove('left')}>Left</button>
-        <button className='button' onClick={() => handleMove('right')}>Right</button>
+          <button className='button' onClick={() => handleMove('up')}>Up</button>
+          <button className='button' onClick={() => handleMove('down')}>Down</button>
+          <button className='button' onClick={() => handleMove('left')}>Left</button>
+          <button className='button' onClick={() => handleMove('right')}>Right</button>
         </div>
+      </div>
+      <div className="footer">
       </div>
     </div>
   );
