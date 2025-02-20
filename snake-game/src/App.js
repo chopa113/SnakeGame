@@ -3,7 +3,9 @@ import './App.css';
 import Game from './Game';
 
 function App() {
-  const [game] = useState(new Game(10, 10));
+  var x = 10;
+  var y = 10;
+  const [game] = useState(new Game(x,y));
   const [field, setField] = useState(game.getField());
   const [direction, setDirection] = useState('right');
 
@@ -18,7 +20,7 @@ function App() {
       game.checkIfAppleEaten();
       game.apple();
       setField([...game.getField()]);
-    }, 200);
+    }, 100);
 
     return () => clearInterval(interval);
   }, [direction, game]);
@@ -62,6 +64,7 @@ function App() {
     setDirection(newDirection);
   };
 
+
   return (
     <div>
       <div className="title">
@@ -78,7 +81,7 @@ function App() {
                   backgroundColor: cell.color,
                   width: '20px',
                   height: '20px',
-                  border: '1px solid #ddd',
+                  border: '1px solid #393e46с',
                 }}
               />
             ))}

@@ -16,7 +16,7 @@ class Game {
             for (let i = 0; i < this.fieldHeight; i++) {
                 const row = [];
                 for (let j = 0; j < this.fieldWidth; j++) {
-                    const cell = { x: j, y: i, snake: false, color: 'white' };
+                    const cell = { x: j, y: i, snake: false, color: '#222831' };
                     row.push(cell);
                 }
                 field.push(row);
@@ -125,7 +125,7 @@ class Game {
         updateField() {
             this.field.forEach(row => row.forEach(cell => {
                 cell.snake = false;
-                cell.color = 'white';
+                cell.color = '#222831';
             }));
     
             this.snake.forEach(segment => {
